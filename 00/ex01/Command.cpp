@@ -29,9 +29,8 @@ namespace Pals {
         }
 
         CommandType Command::command() {
-                std::string r_line = to_lower(m_line);
-                return r_line == "add" ? ADD :
-                       r_line == "search" ? PRINT :
-                       r_line == "exit" ? EXIT : NONE;
+                return m_line == "ADD" ? ADD :
+                       m_line == "SEARCH" ? PRINT :
+                       m_line == "EXIT" ? EXIT : NONE;
         }
 }

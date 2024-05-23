@@ -39,7 +39,7 @@ int main() {
                                 goto ext;
                                 break;
                         default:
-                                std::cout << "Unable to find Command : '" << line << '\'' << std::endl;
+                                std::cout << "Unable to find Command : '" << line << "'" << std::endl;
                                 break;
                 }
                 std::cout << "PalPhone> ";

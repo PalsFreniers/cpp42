@@ -1,6 +1,7 @@
 #include "PhoneBook.hpp"
 #include <iostream>
 #include <iomanip>
+#include <limits>
 
 PhoneBook::PhoneBook() : contacts(new Contact[8]), i(0), nbr(0) {}
 
@@ -65,6 +66,8 @@ void PhoneBook::print() const {
 void PhoneBook::show(int i) const {
         if(std::cin.fail()) {
                 std::cout << "This is not even a number" << std::endl;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 return;
         }
         if(i < 0 || i > 8) {
