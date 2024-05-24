@@ -1,5 +1,8 @@
 #include <iostream>
+#include <sstream>
+#include <string>
 #include "Command.hpp"
+#include "Exception.hpp"
 #include "PhoneBook.hpp"
 
 void add(PhoneBook &book) {
@@ -8,14 +11,28 @@ void add(PhoneBook &book) {
 
 void search(PhoneBook &book) {
         if(!book.hasContact()) {
-                std::cout << "please add contacts before trying to search in them" << std::endl;
+                std::cout << "\033[1;31m[ERROR]\033[0m => please add contacts before trying to search in them" << std::endl;
                 return;
         }
         book.print();
+retry:
         std::cout << "PalPhone Search> ";
-        int i;
-        std::cin >> i;
-        book.show(i);
+        std::cout.flush();
+        int i = -1;
+        std::string tmp;
+        bool valid = true;
+        std::getline(std::cin, tmp);
+        if(tmp.empty()) valid = false;
+        else {
+                std::istringstream is(tmp);
+                is >> i;
+                if(is.fail()) valid = false;
+        }
+        try {
+                book.show(i, valid);
+        } catch (Pals::Utils::Exception) { 
+                goto retry;
+        }
 }
 
 int main() {
@@ -39,12 +56,12 @@ int main() {
                                 goto ext;
                                 break;
                         default:
-                                std::cout << "Unable to find Command : '" << line << "'" << std::endl;
+                                std::cout << "\033[1;31m[ERROR]\033[0m => Unable to find Command : '" << line << "'" << std::endl;
                                 break;
                 }
                 std::cout << "PalPhone> ";
         } while(std::getline(std::cin, line)); 
 ext:
-        std::cout << "I hope you had fun Good Bye!" << std::endl;
+        std::cout << "I hope you had fun Good bye and good luck cathcing new pals!" << std::endl;
         return 0;
 }

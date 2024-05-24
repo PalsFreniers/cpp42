@@ -11,11 +11,10 @@ public:
 
         void addContact();
         void print() const;
-        void show(int i) const;
+        void show(int i, bool valid) const;
         bool hasContact() const;
 private:
-        Contact *contacts;
-        int i;
-        int nbr;
+        Contact contacts[8];
+        int _i;
 };
 
