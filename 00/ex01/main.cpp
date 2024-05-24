@@ -4,6 +4,7 @@
 #include "Command.hpp"
 #include "Exception.hpp"
 #include "PhoneBook.hpp"
+#define foreach(name, data) for(__typeof__((data).begin()) name = (data).begin(); name != (data).end(); name++)
 
 void add(PhoneBook &book) {
         book.addContact();
@@ -23,6 +24,8 @@ retry:
         bool valid = true;
         std::getline(std::cin, tmp);
         if(tmp.empty()) valid = false;
+        if(std::cin.eof()) throw Pals::Utils::Exception();
+        foreach(it, tmp) if(std::iscntrl(*it)) valid = false;
         else {
                 std::istringstream is(tmp);
                 is >> i;
@@ -39,18 +42,24 @@ int main() {
         PhoneBook book;
         std::cout << "Welcome to PalPhone the PalWorld phonebook" << std::endl;
         std::string line = "";
-        std::cout << "PalPhone> ";
+        Pals::Command cmd;
         do {
+                std::cout.flush();
                 if(line.empty()) {
-                        continue;
+                        goto ctn;
                 }
-                Pals::Command cmd = line;
+                cmd = line;
+                foreach(it, line) if(std::iscntrl(*it)) goto err;
                 switch (cmd.command()) {
                         case Pals::ADD:
                                 add(book);
                                 break;
                         case Pals::PRINT:
-                                search(book);
+                                try {
+                                        search(book);
+                                } catch(Pals::Utils::Exception) {
+                                        goto ext;
+                                }
                                 break;
                         case Pals::EXIT:
                                 goto ext;
@@ -59,7 +68,12 @@ int main() {
                                 std::cout << "\033[1;31m[ERROR]\033[0m => Unable to find Command : '" << line << "'" << std::endl;
                                 break;
                 }
+ctn:
                 std::cout << "PalPhone> ";
+                continue;
+err:
+                std::cout << "\033[1;31m[ERROR]\033[0m => found control sequences in command" << std::endl;
+                goto ctn;
         } while(std::getline(std::cin, line)); 
 ext:
         std::cout << "I hope you had fun Good bye and good luck cathcing new pals!" << std::endl;

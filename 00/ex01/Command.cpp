@@ -16,6 +16,11 @@ namespace Pals {
                 return *this;
         }
 
+        Command &Command::operator=(const std::string l) {
+                m_line = l;
+                return *this;
+        }
+
         char low(char c) {
                 if(c >= 'A' && c <= 'Z')
                         return c + ' ';

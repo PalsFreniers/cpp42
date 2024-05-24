@@ -1,4 +1,4 @@
-CXX = clang++-15
+CXX = clang++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = phonebook
 SRC = main.cpp Contact.cpp PhoneBook.cpp Command.cpp Exception.cpp

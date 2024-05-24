@@ -13,7 +13,9 @@ public:
 
 namespace lambdas {
         void l1(const int count, const char *const args[]) {
-                if(count < 2) throw NotEnoughArgumentException();
+                if(count >= 2) goto cnt;
+                throw NotEnoughArgumentException();
+cnt:
                 for(int i = 1; i < count; i++) {
                         std::string str = args[i];
                         foreach(it, str) std::cout << static_cast<char>(std::toupper(*it));
