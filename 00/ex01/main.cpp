@@ -87,6 +87,6 @@ err:
                 goto ctn;
         } while(std::getline(std::cin, line)); 
 ext:
-        std::cout << "I hope you had fun Good bye and good luck cathcing new pals!" << std::endl;
+        std::cout << "I hope you had fun Good bye and good luck catching new pals!" << std::endl;
         return 0;
 }

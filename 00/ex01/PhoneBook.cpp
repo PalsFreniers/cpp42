@@ -54,7 +54,7 @@ err:
 end:
         return;
 err2:
-        std::cout << "\033[1;31m[ERROR]\033[0m => Contact can't control sequences in the" << std::endl;
+        std::cout << "\033[1;31m[ERROR]\033[0m => Contact can't have control sequences in their fields" << std::endl;
         return;
 }
 
