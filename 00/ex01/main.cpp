@@ -1,10 +1,12 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <csignal>
 #include "Command.hpp"
 #include "Exception.hpp"
 #include "PhoneBook.hpp"
 #define foreach(name, data) for(__typeof__((data).begin()) name = (data).begin(); name != (data).end(); name++)
+#define UNUSED(x) (void)(x)
 
 void add(PhoneBook &book) {
         book.addContact();
@@ -38,7 +40,16 @@ retry:
         }
 }
 
+void sh(int n) {
+        UNUSED(n);
+        std::cout << "all this is because of kiroussa" << std::endl;
+        std::cout << std::endl << "PalPhone> ";
+        std::cout.flush();
+}
+
 int main() {
+        std::signal(SIGINT, sh);
+        std::signal(SIGQUIT, sh);
         PhoneBook book;
         std::cout << "Welcome to PalPhone the PalWorld phonebook" << std::endl;
         std::string line = "";

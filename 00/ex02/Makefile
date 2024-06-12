@@ -1,4 +1,4 @@
-CXX = clang++
+CXX = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = TJOYD
 SRC = tests.cpp Account.cpp
