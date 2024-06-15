@@ -60,7 +60,7 @@ err2:
 
 void PhoneBook::print() const {
         std::cout << "|   Index  |First Name| Last Name| Nickname |" << std::endl;
-        for (int j = 0; j < _i % 8; j++) {
+        for (int j = 0; j < (_i < 8 ? _i % 8 : 8); j++) {
                 std::cout << "|" << std::setw(10) << j << "|";
                 contacts[j].print();
                 std::cout << std::endl;
