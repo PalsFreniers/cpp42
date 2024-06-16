@@ -3,7 +3,7 @@
 
 int main(int c, char *args[]) {
         if(c < 2 || c > 2) {
-                std::cerr << "Error Harl filter only take 1 argument" << std::endl;
+                std::cerr << "Error Harl filter take 1 argument" << std::endl;
                 return 1;
         }
         Harl h;
