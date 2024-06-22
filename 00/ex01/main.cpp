@@ -35,7 +35,7 @@ retry:
         }
         try {
                 book.show(i, valid);
-        } catch (Pals::Utils::Exception) { 
+        } catch (Pals::Utils::Exception *) { 
                 goto retry;
         }
 }
@@ -68,7 +68,7 @@ int main() {
                         case Pals::PRINT:
                                 try {
                                         search(book);
-                                } catch(Pals::Utils::Exception) {
+                                } catch(Pals::Utils::Exception *) {
                                         goto ext;
                                 }
                                 break;

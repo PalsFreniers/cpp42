@@ -26,8 +26,8 @@ int main(const int count, const char *const args[])
 {
         try {
                 lambdas::l1(count, args);
-        } catch(NotEnoughArgumentException e) {
-                std::cout << e.what() << std::endl;
+        } catch(std::exception *e) {
+                std::cout << e->what() << std::endl;
         }
         return 0;
 }
