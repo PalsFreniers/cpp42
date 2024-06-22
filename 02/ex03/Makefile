@@ -1,4 +1,4 @@
-CXX = clang++
+CXX = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = bsp
 SRC = main.cpp Fixed.cpp Point.cpp bsp.cpp

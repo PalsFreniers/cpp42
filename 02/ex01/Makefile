@@ -1,4 +1,4 @@
-CXX = clang++
+CXX = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = fixed
 SRC = main.cpp Fixed.cpp
