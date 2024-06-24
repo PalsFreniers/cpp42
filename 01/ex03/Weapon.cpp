@@ -15,7 +15,7 @@ Weapon &Weapon::operator=(const Weapon &other) {
         return *this;
 }
 
-std::string Weapon::getType() {
+std::string const &Weapon::getType() {
         return type;
 }
 
