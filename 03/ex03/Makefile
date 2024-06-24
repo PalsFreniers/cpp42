@@ -1,11 +1,11 @@
 ##========== SOURCES ==========##
 
-SRC = ClapTrap.cpp
+SRC = ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 MAIN = main.cpp
 
 ##========== NAMES ==========##
 
-NAME = claptrap
+NAME = diamondtrap
 SRCS_DIR = ./
 OBJS_DIR = ./OBJ/
 

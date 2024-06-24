@@ -15,4 +15,14 @@ int main() {
         a.takeDamage(5);
         a.beRepaired(20);
         c.takeDamage(100);
+        c.beRepaired(20);
+        a.attack("Michel");
+        a.attack("Michel");
+        a.attack("Michel");
+        a.attack("Michel");
+        a.attack("Michel");
+        a.attack("Michel");
+        a.attack("Michel");
+        a.attack("Michel");
+        a.attack("Michel");
 }
