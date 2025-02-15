@@ -24,7 +24,7 @@ int main()
                 bob->equip(tmp);
                 bob.unequip(0);
         }
-
+        me->use(1, *bob);
         me->unequip(1);
         tmp = src->createMateria("ice");
         me->equip(tmp);
