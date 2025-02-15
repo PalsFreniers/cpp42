@@ -22,7 +22,7 @@ int main()
                 me->use(0, *bob);
                 me->use(1, *bob);
                 bob->equip(tmp);
-                bob.unequip(1);
+                bob.unequip(0);
         }
 
         me->unequip(1);
