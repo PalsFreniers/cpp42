@@ -7,6 +7,8 @@
 #define MAX_GRADE 150
 #define MIN_GRADE 1
 
+class Form;
+
 class Bureaucrat {
 public:
         Bureaucrat();
@@ -20,6 +22,8 @@ public:
 
         Bureaucrat &operator++();
         Bureaucrat &operator--();
+
+        void signForm(Form &f);
 
         class GradeTooHighException : public std::exception {
         public:

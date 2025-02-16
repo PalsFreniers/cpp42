@@ -1,4 +1,6 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
+#include <exception>
 
 int main() {
         try {
@@ -28,5 +30,17 @@ int main() {
                 Bureaucrat a = Bureaucrat("david", 180);
         } catch(std::exception &e) {
                 std::cout << e.what() << std::endl;
+        }
+        {
+                Form f("testForm", 50, 50);
+                Bureaucrat a = Bureaucrat("david", 1);
+                a.signForm(f);
+                std::cout << f;
+        }
+        {
+                Form f("testForm", 50, 50);
+                Bureaucrat a = Bureaucrat("david", 130);
+                a.signForm(f);
+                std::cout << f;
         }
 }

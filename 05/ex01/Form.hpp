@@ -1,13 +1,25 @@
 #pragma once
 
 #include <string>
+#include "Bureaucrat.hpp"
 
-class Form {
+class Form
+{
 public:
-        Form();
-        Form(std::string name, int grade, int required);
-        Form(const Form &other);
-        Form &operator=(const Form &other);
+	// Orthodox Canonical Form
+	Form();
+        Form(const std::string &name, const int &gradeSign, const int &gradeExec);
+	Form(const Form &src);
+	Form&operator=(const Form &rhs);
+	~Form();
+
+	// Accessors
+	std::string getName() const;
+	bool getSigned() const;
+	int getGradesign() const;
+	int getGradeexec() const;
+
+        void beSigned(Bureaucrat b);
 
         class GradeTooHighException : public std::exception {
         public:
@@ -20,9 +32,12 @@ public:
                 GradeTooLowException();
                 const char *what() const throw();
         };
+
 private:
-        const std::string _name;
-        bool _signed;
-        const int _grade;
-        const int _required;
+	const std::string _name;
+	bool _signed;
+	const int _gradeSign;
+	const int _gradeExec;
 };
+
+std::ostream &operator<<(std::ostream &out, const Form &b);

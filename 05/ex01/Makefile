@@ -1,6 +1,6 @@
 ##========== SOURCES ==========##
 
-SRC = Bureaucrat.cpp 
+SRC = Bureaucrat.cpp Form.cpp
 MAIN = main.cpp
 
 ##========== NAMES ==========##
