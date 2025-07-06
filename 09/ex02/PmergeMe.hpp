@@ -1,7 +1,5 @@
 #include <iostream>
 #include <string>
-#include <vector> // STL Container
-#include <deque>  // STL Container
 
 class PmergeMe {
 private:
