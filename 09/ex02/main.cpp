@@ -8,6 +8,10 @@
 
 static bool parseArgs(int argc, char **argv, std::vector<int> &vecToSort, std::deque<int> &dequeToSort) {
 	for (int i = 1; i < argc; i++) {
+		if(std::string(argv[i]).empty()) {
+			std::cerr << "Error: invalid number: " << argv[i] << std::endl;
+			return false;
+		}
 		char *end;
 		int nb = std::strtol(argv[i], &end, 10);
 		if(*end != '\0' || errno == ERANGE || i > INT_MAX || i < 0) {
