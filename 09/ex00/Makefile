@@ -1,42 +1,37 @@
-# **************************************************************************** #
+NAME = btc
 
-NAME		?=	btc
+INCLUDES = inc/
 
-SRCS		?=	BitcoinExchange.cpp
-SRCS		+=	main.cpp
+CFLAGS = -I$(INCLUDES) -Werror -Wall -Wextra -g --std=c++98
+CC = c++
 
-# **************************************************************************** #
+SRC_DIR = src/
+SRC_NAME =	main.cpp \
+			BitcoinExchange.cpp \
+			StockMarket.cpp \
+			Date.cpp \
 
-CXX			=	c++
-CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98 -g3 -gdwarf-3
+OBJ_DIR = obj/
+OBJ_NAME = $(SRC_NAME:.cpp=.o)
+OBJ = $(patsubst %, $(OBJ_DIR)%, $(OBJ_NAME))
+$(OBJ_DIR)%.o:$(SRC_DIR)%.cpp
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) $< -c -o $@
+	@echo "\033[1;36m Compiled" $(*F)
 
-OBJS		:=	$(SRCS:.cpp=.o)
 
-# **************************************************************************** #
+$(NAME): $(OBJ)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+	@echo "\033[1;32m Executable" $(NAME) "created"
+
+clean:
+	@rm -rf $(OBJ_DIR)
+	@echo "\033[1;31m Deleted all object files"
+
+fclean: clean
+	@rm -f $(NAME)
+	@echo "\033[1;31m Deleted $(NAME)"
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CXX) $(OBJS) -o $(NAME)
-
-clean:
-	rm -f $(OBJS)
-
-fclean: clean
-	rm -f $(NAME)
-
-re:	fclean all
-
-# **************************************************************************** #
-
-run: $(NAME)
-	@clear
-	@./$(NAME)
-
-vgrun: $(NAME)
-	@clear
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(VG_ARGS)
-
-# **************************************************************************** #
-
-.PHONY: all clean fclean re run vgrun
+re: fclean all
