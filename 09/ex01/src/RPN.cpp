@@ -1,4 +1,5 @@
 #include "../inc/RPN.h"
+#include <cmath>
 
 RPN::RPN() {}
 
@@ -45,15 +46,19 @@ void RPN::calculate(std::string data) {
                         case '+':
                                 stack.push(plop(stack, c) + plop(stack, c));
                                 break;
-                        case '-':
-                                stack.push(plop(stack, c) - plop(stack, c));
+                        case '-': {
+                                double a = plop(stack, c);
+                                stack.push(plop(stack, c) - a);
                                 break;
+                        }
                         case '*':
                                 stack.push(plop(stack, c) * plop(stack, c));
                                 break;
-                        case '/':
-                                stack.push(plop(stack, c) / plop(stack, c));
+                        case '/': {
+                                double a = plop(stack, c);
+                                stack.push(plop(stack, c) / a);
                                 break;
+                        }
                         default:
                                 if(std::isspace(c)) break;
                                 throw std::logic_error(std::string("unknown character '") + c + std::string("'"));
@@ -97,15 +102,23 @@ void RPN::calculate(std::string data) {
                         case '+':
                                 stack.push(plop(stack, c) + plop(stack, c));
                                 break;
-                        case '-':
-                                stack.push(plop(stack, c) - plop(stack, c));
+                        case '-': {
+                                double a = plop(stack, c);
+                                stack.push(plop(stack, c) - a);
                                 break;
+                        }
                         case '*':
                                 stack.push(plop(stack, c) * plop(stack, c));
                                 break;
-                        case '/':
-                                stack.push(plop(stack, c) / plop(stack, c));
+                        case '/': {
+                                double a = plop(stack, c);
+                                stack.push(plop(stack, c) / a);
                                 break;
+                        }
+                        case '%': {
+                                double a = plop(stack, c);
+                                stack.push(std::fmod(plop(stack, c), a));
+                        }
                         case 'l':
                                 pos.push(getpos());
                                 break;
@@ -162,6 +175,15 @@ void RPN::calculate(std::string data) {
 }
 
 // print value from 0 to 10
-// 5 5 + 0 l d p 1 + o o - e _ p
+// 5 5 + 0 l d p 1 + o o < - e _ p
+// %: use the fmod function on the two first values on the stack
+// l: start a new loop
+// d: duplicate the top of the stack
+// p: print the top of the stack (consuming it)
+// o: duplicate the second value on the stack and put is on top (1 0 => 1 0 1)
+// <: swap the two first value on the stack (1 0 => 0 1)
+// e: end a loop, if the value on top of the stack is not zero then go back to the corresponding l character
+// _: remove the first value on the stack
+// inspired by my own project: https://github.com/PalsFreniers/thrust
 
 #endif
