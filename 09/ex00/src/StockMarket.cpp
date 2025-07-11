@@ -20,6 +20,7 @@ StockMarket& StockMarket::operator=(const StockMarket& rhs) {
 
 float StockMarket::operator[](const date& idx) const {
         StockMarket::const_iterator it;
+        if(_prices.find(idx) != _prices.end()) return _prices.at(idx);
         for(it = _prices.begin(); it != _prices.end(); ++it) if(it->first > idx) break;
         return it != _prices.end() ? it->second : (--_prices.end())->second;
 }
