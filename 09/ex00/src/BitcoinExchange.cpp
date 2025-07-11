@@ -36,6 +36,7 @@ void BitcoinExchange::loadFile(const std::string& filePath) {
 
         while(!file.eof()) {
                 std::getline(file, line);
+                if(line.empty()) continue;
                 if(line.length() < 13 || line.at(11) != '|') {
                         ERROR BRED "Line doesn't follow format \"date | format\"" CLR ENDL;
                         ERROR TAB BBLK AND line AND CLR ENDL;
@@ -67,14 +68,11 @@ static date extractDate(std::string &line) {
 
         errno = 0;
         year = strtol(line.c_str(), &end, 10);
-        if(errno == ERANGE || end[0] != '-')
-                throw std::out_of_range("Invalid Year");
+        if(errno == ERANGE || end[0] != '-') throw std::out_of_range("Invalid Year");
         month = strtol(&line.at(5), &end, 10);
-        if(errno == ERANGE || end[0] != '-')
-                throw std::out_of_range("Invalid Month");
+        if(errno == ERANGE || end[0] != '-') throw std::out_of_range("Invalid Month");
         day = strtol(&line.at(8), &end, 10);
-        if(errno == ERANGE || end[0] != ' ')
-                throw std::out_of_range("Invalid Day");
+        if(errno == ERANGE || end[0] != ' ') throw std::out_of_range("Invalid Day");
         return date(year, month, day);
 }
 
@@ -84,12 +82,9 @@ static float extractAmount(std::string &line) {
 
         errno = 0;
         rate = strtof(&line.at(13), &end);
-        if(errno == ERANGE || rate > 1000)
-                throw std::overflow_error("Too much BTC");
-        if(rate < 0)
-                throw std::domain_error("Rate cannot be negative");
-        if(end[0] != '\0')
-                throw std::logic_error("Invalid line");
+        if(errno == ERANGE || rate > 1000) throw std::overflow_error("Too much BTC");
+        if(rate < 0) throw std::domain_error("Rate cannot be negative");
+        if(end[0] != '\0') throw std::logic_error("Invalid line");
         return rate;
 }
 
