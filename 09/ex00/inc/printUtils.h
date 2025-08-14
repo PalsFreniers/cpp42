@@ -6,3 +6,5 @@
 #define ENDL << std::endl
 #define TAB "\t"
 #define NEWL std::cout << std::endl
+
+#define auto __auto_type

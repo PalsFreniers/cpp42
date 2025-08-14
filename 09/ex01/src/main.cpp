@@ -1,13 +1,14 @@
 #include "../inc/RPN.h"
 
 int main(int argc, char *argv[]) {
-        if(argc != 2) ERROR BRED AND "unable to parse RPN program ''" AND CLR ENDL;
-        RPN calculator;
+        auto arg = std::string("0");
+        if(argc > 1) arg = argv[1];
+        auto calculator = RPN();
         try {
-                PRINT BCYN "Now calculating: " BYLW AND argv[1] AND CLR ENDL;
+                PRINT BCYN "Now calculating: " BYLW AND arg AND CLR ENDL;
                 calculator.calculate(argv[1]);
         } catch (std::exception &e) {
                 ERROR BRED AND e.what() AND CLR ENDL;
-                return (1);
+                return 1;
         }
 }

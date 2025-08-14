@@ -10,6 +10,8 @@
 # include "printUtils.h"
 # include "colors.h"
 
+#define auto __auto_type
+
 class RPN
 {
         public:

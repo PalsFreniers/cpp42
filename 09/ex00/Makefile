@@ -10,6 +10,7 @@ SRC_NAME =	main.cpp \
 			BitcoinExchange.cpp \
 			StockMarket.cpp \
 			Date.cpp \
+			utils.cpp
 
 OBJ_DIR = obj/
 OBJ_NAME = $(SRC_NAME:.cpp=.o)

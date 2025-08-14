@@ -8,6 +8,7 @@
 #include "colors.h"
 #include "printUtils.h"
 #include "Date.h"
+#include "utils.h"
 
 #define DATA_PATH "inc/data.csv"
 

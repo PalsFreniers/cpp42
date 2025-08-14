@@ -14,31 +14,31 @@
 
 #define VECTOR 0
 #define DEQUE 1
+#define auto __auto_type
 
 typedef unsigned int uint;
 
 class PmergeMe {
-        public:
-                PmergeMe();
-                PmergeMe(const PmergeMe &src);
-                PmergeMe &operator=(const PmergeMe &rhs);
-                ~PmergeMe();
+public:
+        PmergeMe();
+        PmergeMe(const PmergeMe &src);
+        PmergeMe &operator=(const PmergeMe &rhs);
+        ~PmergeMe();
 
-                void run(const std::string &sequence);
-
-        private:
-                template <typename T>
-                void _loadSequence(const std::string &sequence, T &container);
-
-                template <typename T>
-                void _mergeInsertSort(T &container, int start, int end);
-
-                template <typename T>
-                void _mergeSort(T &container, int start, int mid, int end);
-
-                template <typename T>
-                void _insertSort(T &container, int start, int end);
-
-                std::vector<uint> _vector;
-                std::deque<uint> _deque;
+        void run(const std::string &sequence);
+private:
+        template <typename T>
+        void _loadSequence(const std::string &sequence, T &container);
+        template <typename T>
+        void _mergeInsertSort(T &container, int start, int end);
+        template <typename T>
+        void _mergeSort(T &container, int start, int mid, int end);
+        template <typename T>
+        void _insertSort(T &container, int start, int end);
+        template<typename T>
+        double _doSortTimed(T &container, const std::string sequence);
+        template<typename T>
+        double _showSortTimed(const std::string name, T &container, const std::string sequence);
+        std::vector<uint> _vector;
+        std::deque<uint> _deque;
 };

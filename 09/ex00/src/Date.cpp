@@ -8,7 +8,7 @@ date::date() {
         day = 0;
 }
 
-static bool isValidDate(uint month, uint day) {
+bool isValidDate(uint month, uint day) {
         if (month < 1 || month > 12) return false;
         else if (month == 2) { if (day < 1 || day > 29) return false; }
         else if (month == 4 || month == 6 || month == 9 || month == 11) { if (day < 1 || day > 30) return false; }
@@ -16,10 +16,10 @@ static bool isValidDate(uint month, uint day) {
         return true;
 }
 
-date::date(uint year, uint month, uint day) {
-        year = year;
-        month = month;
-        day = day;
+date::date(uint _year, uint _month, uint _day) {
+        year = _year;
+        month = _month;
+        day = _day;
         if(!isValidDate(month, day)) throw std::domain_error("Invalid date");
 }
 

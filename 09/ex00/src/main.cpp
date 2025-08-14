@@ -5,10 +5,10 @@
 #include "../inc/BitcoinExchange.h"
 
 int main(int argc, char *argv[]) {
-        if(argc != 2) ERROR BRED AND "unable to open file: (no input file sspecified)" AND CLR ENDL;
+        if(argc != 2) ERROR BRED AND "no input file sspecified" AND CLR ENDL;
         try {
-                StockMarket market = StockMarket();
-                BitcoinExchange history;
+                auto market = StockMarket();
+                auto history = BitcoinExchange();
                 history.loadFile(argv[1]);
                 history.printValue(market);
         } catch(std::exception &e) {

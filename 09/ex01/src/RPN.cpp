@@ -17,7 +17,7 @@ RPN::~RPN() {}
 template<typename T>
 T plop(std::stack<T> &stk, char c = ' ') {
         if(stk.size() < 1) throw std::out_of_range(std::string("unable to pop from stack: (not enough values)\nfor operation : ") + c);
-        T tmp = stk.top();
+        auto tmp = stk.top();
         stk.pop();
         return tmp;
 }
@@ -28,7 +28,7 @@ T plop(std::stack<T> &stk, char c = ' ') {
 #define endforeach }}
 
 void RPN::calculate(std::string data) {
-        std::stack<double> stack;
+        auto stack = std::stack<double>();
         foreach(c, data)
                 switch(c) {
                         case '0':
@@ -47,7 +47,7 @@ void RPN::calculate(std::string data) {
                                 stack.push(plop(stack, c) + plop(stack, c));
                                 break;
                         case '-': {
-                                double a = plop(stack, c);
+                                auto a = plop(stack, c);
                                 stack.push(plop(stack, c) - a);
                                 break;
                         }
@@ -55,7 +55,7 @@ void RPN::calculate(std::string data) {
                                 stack.push(plop(stack, c) * plop(stack, c));
                                 break;
                         case '/': {
-                                double a = plop(stack, c);
+                                auto a = plop(stack, c);
                                 stack.push(plop(stack, c) / a);
                                 break;
                         }
@@ -83,8 +83,8 @@ void RPN::calculate(std::string data) {
 #define getpos() (__it__ - 1)
 
 void RPN::calculate(std::string data) {
-        std::stack<double> stack;
-        std::stack<int> pos;
+        auto stack = std::stack<double>();
+        auto pos = std::stack<int>();
         foreach(c, data)
                 switch(c) {
                         case '0':
@@ -103,7 +103,7 @@ void RPN::calculate(std::string data) {
                                 stack.push(plop(stack, c) + plop(stack, c));
                                 break;
                         case '-': {
-                                double a = plop(stack, c);
+                                auto a = plop(stack, c);
                                 stack.push(plop(stack, c) - a);
                                 break;
                         }
@@ -111,49 +111,52 @@ void RPN::calculate(std::string data) {
                                 stack.push(plop(stack, c) * plop(stack, c));
                                 break;
                         case '/': {
-                                double a = plop(stack, c);
+                                auto a = plop(stack, c);
                                 stack.push(plop(stack, c) / a);
                                 break;
                         }
                         case '%': {
-                                double a = plop(stack, c);
+                                auto a = plop(stack, c);
                                 stack.push(std::fmod(plop(stack, c), a));
                         }
                         case 'l':
                                 pos.push(getpos());
                                 break;
                         case 'e':
-                                if(plop(stack, c) == 0) break;
+                                if(plop(stack, c) == 0) {
+                                        plop(pos, c);
+                                        break;
+                                }
                                 goat(plop(pos, c));
                                 break;
                         case '<': {
-                                double a = plop(stack, c);
-                                double b = plop(stack, c);
+                                auto a = plop(stack, c);
+                                auto b = plop(stack, c);
                                 stack.push(a);
                                 stack.push(b);
                                 break;
                         }
                         case 'p': {
-                                double tmp = plop(stack, c);
+                                auto tmp = plop(stack, c);
                                 PRINT BBLU AND "stack top is: " AND tmp AND CLR ENDL;
                                 break;
                         }
                         case 'd': {
-                                double a  = plop(stack, c);
+                                auto a  = plop(stack, c);
                                 stack.push(a);
                                 stack.push(a);
                                 break;
                         }
                         case 'o': {
-                                double a  = plop(stack, c);
-                                double b  = plop(stack, c);
+                                auto a  = plop(stack, c);
+                                auto b  = plop(stack, c);
                                 stack.push(b);
                                 stack.push(a);
                                 stack.push(b);
                                 break;
                         }
                         case '_': {
-                                double a  = plop(stack, c);
+                                auto a  = plop(stack, c);
                                 (void)a;
                                 break;
                         }
